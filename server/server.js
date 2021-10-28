@@ -17,6 +17,7 @@ async function startServer() {
     resolvers,
     constext: authMiddleware,
   });
+  await apollo_server.start();
   
   apollo_server.applyMiddleware({ app });
 }
@@ -34,6 +35,6 @@ if (process.env.NODE_ENV === 'production') {
 db.once('open', () => {
   app.listen(PORT, () => {
     console.log(`🌍 Now listening on localhost:${PORT}`)
-    console.log(`Use GrqphQL at http://localhost:${PORT}${server.graphqlPath}`)
+    console.log(`Use GrqphQL at http://localhost:${PORT}${apollo_server.graphqlPath}`)
   });
 });
